@@ -8,6 +8,12 @@ var COLS = 15;
 // number of actors per level, including player
 var ACTORS = 10;
 
+// the structure of the map
+var map;
+
+// ascii display, as a 2d array of characters
+var asciidisplay;
+
 // initialize phaser, call create() once done
 // the column number is multiplied by 0.6 because it is being assumed that the default monospace font will be about %60 as wide as they are high
 var game = new Phaser.Game(COLS * FONT * 0.6, ROWS * FONT, Phaser.AUTO, null, {
@@ -20,6 +26,17 @@ function create() {
 
   // initialize map
   initMap();
+
+  //initialize screen
+  asciidisplay = [];
+  for (let y = 0; y < ROWS; y++) {
+    var newRow = [];
+    asciidisplay.push(newRow);
+    for (let x = 0; x < COLS; x++) {
+      newRow.push(initCell('', x, y));
+    }
+  }
+  drawMap()
 }
 
 function onKeyUp(event) {
@@ -34,9 +51,6 @@ function onKeyUp(event) {
 
   }
 }
-
-// the structure of the map
-var map;
 
 function initMap() {
   // create a new random map
@@ -53,9 +67,6 @@ function initMap() {
     map.push(newRow);
   }
 }
-
-// ascii display, as a 2d array of characters
-var asciidisplay;
 
 function drawMap() {
   for (let y = 0; y < ROWS; y++) {
