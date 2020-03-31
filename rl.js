@@ -53,3 +53,14 @@ function initMap() {
     map.push(newRow);
   }
 }
+
+// ascii display, as a 2d array of characters
+var asciidisplay;
+
+function drawMap() {
+  for (let y = 0; y < ROWS; y++) {
+    for (let x = 0; x < COLS; x++) {
+      asciidisplay[y][x].content = map[y][x];
+    }
+  }
+}
