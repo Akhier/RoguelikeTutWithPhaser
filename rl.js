@@ -44,20 +44,19 @@ function create() {
       newRow.push(initCell('', x, y));
     }
   }
-  drawMap()
+
+  // initialize actors
+  initActors();
+
+  // draw level
+  drawMap();
+  drawActors();
 }
 
-function onKeyUp(event) {
-  switch (event.KeyCode) {
-    case Keyboard.LEFT:
-
-    case Keyboard.RIGHT:
-
-    case Keyboard.UP:
-
-    case Keyboard.DOWN:
-
-  }
+function initCell(chr, x, y) {
+  // add a single cell in a given position to the ascii display
+  var style = { font: FONT + "px monospace", fill:"#fff"};
+  return game.add.text(FONT*0.6*x, FONT*y, chr, style);
 }
 
 function initMap() {
@@ -84,12 +83,6 @@ function drawMap() {
   }
 }
 
-function initCell(chr, x, y) {
-  // add a single cell in a given position to the ascii display
-  var style = { font: FONT + "px monospace", fill:"#fff"};
-  return game.add.text(FONT*0.6*x, FONT*y, chr, style);
-}
-
 function randomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -112,4 +105,25 @@ function initActors() {
   // the player is the first actor in the list
   player = actorList[0];
   livingEnemies = ACTORS - 1;
+}
+
+function drawActors() {
+  for (const a in actorList) {
+    if (actorList[a].hp > 0) {
+      asciidisplay[actorList[a].y][actorList[a].x].content = a == 0?''+player.hp:'e';
+    }
+  }
+}
+
+function onKeyUp(event) {
+  switch (event.KeyCode) {
+    case Keyboard.LEFT:
+
+    case Keyboard.RIGHT:
+
+    case Keyboard.UP:
+
+    case Keyboard.DOWN:
+
+  }
 }
