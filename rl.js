@@ -11,10 +11,10 @@ var ACTORS = 10;
 // the structure of the map
 var map;
 
-// ascii display, as a 2d array of characters
+// the ascii display, as a 2d array of characters
 var asciidisplay;
 
-// a list of all actors; 0 is the player
+// a list of all actors, 0 is the player
 var player;
 var actorList;
 var livingEnemies;
@@ -123,12 +123,12 @@ function drawActors() {
   }
 }
 
-function canGo(actor, dir) {
-  return actor.x + dir.x >= 0 &&
-         actor.x + dir.x <= COLS - 1 &&
-         actor.y + dir.y >= 0 &&
-         actor.y + dir.y <= ROWS - 1 &&
-         map[actor.y + dir.y][actor.x + dir.x] == '.';
+function canGo(actor,dir) {
+  return   actor.x+dir.x >= 0 &&
+      actor.x+dir.x <= COLS - 1 &&
+      actor.y+dir.y >= 0 &&
+      actor.y+dir.y <= ROWS - 1 &&
+      map[actor.y+dir.y][actor.x +dir.x] == '.';
 }
 
 function moveTo(actor, dir) {
@@ -160,7 +160,7 @@ function moveTo(actor, dir) {
     }
   } else {
     // remove reference to the actor's old position
-    actorMap[actor.y + '_' + actor.x] = null;
+    actorMap[actor.y + '_' + actor.x]= null;
 
     // update position
     actor.y += dir.y;
@@ -211,7 +211,7 @@ function onKeyUp(event) {
 }
 
 function aiAct(actor) {
-  var directions = [ {x:-1, y:0}, {x:1, y:0}, {x:0, y:-1}, {x:0, y:1} ];
+  var directions = [ { x: -1, y:0 }, { x:1, y:0 }, { x:0, y: -1 }, { x:0, y:1 } ];
   var dx = player.x - actor.x;
   var dy = player.y - actor.y;
 
