@@ -116,7 +116,7 @@ function drawActors() {
 }
 
 function canGo(actor, dir) {
-  return actor.x + dir.x >=0 &&
+  return actor.x + dir.x >= 0 &&
          actor.x + dir.x <= COLS - 1 &&
          actor.y + dir.y >= 0 &&
          actor.y + dir.y <= ROWS - 1 &&
@@ -166,11 +166,11 @@ function moveTo(actor, dir) {
 
 function onKeyUp(event) {
   // draw map to overwrite previous actors positions
-  drawMap()
+  drawMap();
 
   // act on player input
   var acted = false;
-  switch (event.KeyCode) {
+  switch (event.keyCode) {
     case Phaser.Keyboard.LEFT:
       acted = moveTo(player, {x:-1, y:0});
       break;
@@ -188,6 +188,7 @@ function onKeyUp(event) {
   // enemies act every time the player does
   if (acted) {
     for (const enemy in actorList) {
+      // skip the player
       if (enemy == 0) {
         continue;
       }
