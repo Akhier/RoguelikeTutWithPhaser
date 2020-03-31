@@ -165,14 +165,74 @@ function moveTo(actor, dir) {
 }
 
 function onKeyUp(event) {
+  // draw map to overwrite previous actors positions
+  drawMap()
+
+  // act on player input
+  var acted = false;
   switch (event.KeyCode) {
-    case Keyboard.LEFT:
+    case Phaser.Keyboard.LEFT:
+      acted = moveTo(player, {x:-1, y:0});
+      break;
+    case Phaser.Keyboard.RIGHT:
+      acted = moveTo(player, {x:1, y:0});
+      break;
+    case Phaser.Keyboard.UP:
+      acted = moveTo(player, {x:0, y:-1});
+      break;
+    case Phaser.Keyboard.DOWN:
+      acted = moveTo(player, {x:0, y:1});
+      break;
+  }
 
-    case Keyboard.RIGHT:
+  // enemies act every time the player does
+  if (acted) {
+    for (const enemy in actorList) {
+      if (enemy == 0) {
+        continue;
+      }
+      var e = actorList[enemy];
+      if (e != null) {
+        aiAct(e);
+      }
+    }
+  }
 
-    case Keyboard.UP:
+  // draw actors in new positions
+  drawActors();
+}
 
-    case Keyboard.DOWN:
+function aiAct(actor) {
+  var directions = [ {x:-1, y:0}, {x:1, y:0}, {x:0, y:-1}, {x:0, y:1} ];
+  var dx = player.x - actor.x;
+  var dy = player.y - actor.y;
 
+  // if player is far away, walk randomly
+  if (Math.abs(dx) + Math.abs(dy) > 6) {
+    while (!moveTo(actor, directions[randomInt(directions.length)])) { };
+  }
+
+  // otherwise walk towards player
+  if (Math.abs(dx) > Math.abs(dy)) {
+    if (dx < 0) {
+      // left
+      moveTo(actor, directions[0]);
+    } else {
+      // right
+      moveTo(actor, directions[1]);
+    }
+  } else {
+    if (dy < 0) {
+      // up
+      moveTo(actor, directions[2]);
+    } else {
+      // down
+      moveTo(actor, directions[3]);
+    }
+  }
+  if (player.hp < 1) {
+    // game over message
+    var gameOver = game.add.text(game.world.centerX, game.world.centerY, 'Game Over\nCtrl+r to restart', { fill : '#e22', align: "center"});
+    gameOver.anchor.setTo(0.5, 0.5);
   }
 }
