@@ -138,7 +138,7 @@ function moveTo(actor, dir) {
   }
 
   // moves actor to the new location
-  var newKey = (actor.y + dir.y) + '_' (actor.x + dir.x);
+  var newKey = (actor.y + dir.y) + '_' + (actor.x + dir.x);
   // if the destination tile has an actor in it
   if (actorMap[newKey] != null) {
     // decrement hitpoints of the actor at the destination tile
