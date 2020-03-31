@@ -1,5 +1,6 @@
 // font size
 var FONT = 32;
+var FONTWIDTHDIF = 0.6;
 
 // map dimensions
 var ROWS = 10;
@@ -23,8 +24,7 @@ var livingEnemies;
 var actorMap;
 
 // initialize phaser, call create() once done
-// the column number is multiplied by 0.6 because it is being assumed that the default monospace font will be about %60 as wide as they are high
-var game = new Phaser.Game(COLS * FONT * 0.6, ROWS * FONT, Phaser.AUTO, null, {
+var game = new Phaser.Game(COLS * FONT * FONTFONTWIDTHDIF, ROWS * FONT, Phaser.AUTO, null, {
   create: create
 });
 
@@ -59,7 +59,7 @@ function initCell(chr, x, y) {
     font: FONT + "px monospace",
     fill: "#fff"
   };
-  return game.add.text(FONT * 0.6 * x, FONT * y, chr, style);
+  return game.add.text(FONT * FONTWIDTHDIF * x, FONT * y, chr, style);
 }
 
 function initMap() {
