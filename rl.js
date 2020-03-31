@@ -24,7 +24,7 @@ var livingEnemies;
 var actorMap;
 
 // initialize phaser, call create() once done
-var game = new Phaser.Game(COLS * FONT * FONTFONTWIDTHDIF, ROWS * FONT, Phaser.AUTO, null, {
+var game = new Phaser.Game(COLS * FONT * FONTWIDTHDIF, ROWS * FONT, Phaser.AUTO, null, {
   create: create
 });
 
