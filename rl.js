@@ -161,7 +161,10 @@ function moveTo(actor, dir) {
         livingEnemies--;
         if (livingEnemies == 0) {
           // victory message
-          var victory = game.add.text(game.world.centerX, game.world.centerY, 'Victory!\nCtrl+r to restart', {fill : '#2e2', align: "center"});
+          var victory = game.add.text(game.world.centerX,
+                                      game.world.centerY,
+                                      'Victory!\nCtrl+r to restart',
+                                      {fill : '#2e2', align: "center"});
           victory.anchor.setTo(0.5, 0.5);
         }
       }
@@ -219,7 +222,10 @@ function onKeyUp(event) {
 }
 
 function aiAct(actor) {
-  var directions = [ { x: -1, y:0 }, { x:1, y:0 }, { x:0, y: -1 }, { x:0, y:1 } ];
+  var directions = [ { x: -1, y:0 },
+                     { x:1, y:0 },
+                     { x:0, y: -1 },
+                     { x:0, y:1 } ];
   var dx = player.x - actor.x;
   var dy = player.y - actor.y;
 
@@ -249,7 +255,10 @@ function aiAct(actor) {
   }
   if (player.hp < 1) {
     // game over message
-    var gameOver = game.add.text(game.world.centerX, game.world.centerY, 'Game Over\nCtrl+r to restart', {fill : '#e22', align: "center"});
+    var gameOver = game.add.text(game.world.centerX,
+                                 game.world.centerY,
+                                 'Game Over\nCtrl+r to restart',
+                                 {fill : '#e22', align: "center"});
     gameOver.anchor.setTo(0.5, 0.5);
   }
 }
