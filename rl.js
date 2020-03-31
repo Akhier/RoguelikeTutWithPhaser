@@ -96,10 +96,14 @@ function initActors() {
   actorMap = {};
   for (var e = 0; e < ACTORS; e++) {
     // create new actor
+    var health = 1;
+    if (e == 0) {
+      health = 3;
+    }
     var actor = {
       x: 0,
       y: 0,
-      hp: e == 0 ? 3 : 1
+      hp: health
     };
     do {
       // pick a random position that is both a floor and not occupied
