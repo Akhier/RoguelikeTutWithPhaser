@@ -35,12 +35,12 @@ function create() {
   // initialize map
   initMap();
 
-  //initialize screen
+  // initialize ascii display
   asciidisplay = [];
-  for (let y = 0; y < ROWS; y++) {
+  for (var y = 0; y < ROWS; y++) {
     var newRow = [];
     asciidisplay.push(newRow);
-    for (let x = 0; x < COLS; x++) {
+    for (var x = 0; x < COLS; x++) {
       newRow.push(initCell('', x, y));
     }
   }
@@ -55,16 +55,19 @@ function create() {
 
 function initCell(chr, x, y) {
   // add a single cell in a given position to the ascii display
-  var style = { font: FONT + "px monospace", fill:"#fff"};
-  return game.add.text(FONT*0.6*x, FONT*y, chr, style);
+  var style = {
+    font: FONT + "px monospace",
+    fill: "#fff"
+  };
+  return game.add.text(FONT * 0.6 * x, FONT * y, chr, style);
 }
 
 function initMap() {
   // create a new random map
   map = [];
-  for (let y = 0; y < ROWS; y++) {
+  for (var y = 0; y < ROWS; y++) {
     var newRow = [];
-    for (let x = 0; x < COLS; x++) {
+    for (var x = 0; x < COLS; x++) {
       if (Math.random() > 0.8) {
         newRow.push('#');
       } else {
@@ -76,8 +79,8 @@ function initMap() {
 }
 
 function drawMap() {
-  for (let y = 0; y < ROWS; y++) {
-    for (let x = 0; x < COLS; x++) {
+  for (var y = 0; y < ROWS; y++) {
+    for (var x = 0; x < COLS; x++) {
       asciidisplay[y][x].content = map[y][x];
     }
   }
@@ -91,14 +94,19 @@ function initActors() {
   // create actors at random locations
   actorList = [];
   actorMap = {};
-  for (let e = 0; e < ACTORS; e++) {
+  for (var e = 0; e < ACTORS; e++) {
     // create new actor
-    var actor = { x:0, y:0, hp:e == 0?3:1 };
+    var actor = {
+      x: 0,
+      y: 0,
+      hp: e == 0 ? 3 : 1
+    };
     do {
       // pick a random position that is both a floor and not occupied
       actor.y = randomInt(ROWS);
       actor.x = randomInt(COLS);
     } while (map[actor.y][actor.x] == '#' || actorMap[actor.y + "_" + actor.x] != null);
+    // add references to the actor to the actors list & map
     actorMap[actor.y + "_" + actor.x] = actor;
     actorList.push(actor);
   }
@@ -108,9 +116,9 @@ function initActors() {
 }
 
 function drawActors() {
-  for (const a in actorList) {
-    if (actorList[a].hp > 0) {
-      asciidisplay[actorList[a].y][actorList[a].x].content = a == 0?''+player.hp:'e';
+  for (var a in actorList) {
+    if (actorList[a] != null && actorList[a].hp > 0) {
+      asciidisplay[actorList[a].y][actorList[a].x].content = a == 0 ? '' + player.hp : 'e';
     }
   }
 }
@@ -198,7 +206,6 @@ function onKeyUp(event) {
       }
     }
   }
-
   // draw actors in new positions
   drawActors();
 }
