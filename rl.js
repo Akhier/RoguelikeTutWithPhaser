@@ -31,3 +31,22 @@ function onKeyUp(event) {
 
   }
 }
+
+// the structure of the map
+var map;
+
+function initMap() {
+  //create a new random map
+  map = [];
+  for (let y = 0; y < ROWS; y++) {
+    var newRow = [];
+    for (let x = 0; x < COLS; x++) {
+      if (Math.random() > 0.8) {
+        newRow.push('#');
+      } else {
+        newRow.push('.');
+      }
+    }
+    map.push(newRow);
+  }
+}
