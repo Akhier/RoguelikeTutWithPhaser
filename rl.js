@@ -133,10 +133,10 @@ function drawActors() {
 
 function canGo(actor,dir) {
   return   actor.x+dir.x >= 0 &&
-      actor.x+dir.x <= COLS - 1 &&
-      actor.y+dir.y >= 0 &&
-      actor.y+dir.y <= ROWS - 1 &&
-      map[actor.y+dir.y][actor.x +dir.x] == '.';
+           actor.x+dir.x <= COLS - 1 &&
+           actor.y+dir.y >= 0 &&
+           actor.y+dir.y <= ROWS - 1 &&
+           map[actor.y+dir.y][actor.x +dir.x] == '.';
 }
 
 function moveTo(actor, dir) {
