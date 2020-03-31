@@ -123,6 +123,47 @@ function canGo(actor, dir) {
          map[actor.y + dir.y][actor.x + dir.x] == '.';
 }
 
+function moveTo(actor, dir) {
+  // check if actor can move in the given direction
+  if (!canGo(actor, dir)) {
+    return false;
+  }
+
+  // moves actor to the new location
+  var newKey = (actor.y + dir.y) + '_' (actor.x + dir.x);
+  // if the destination tile has an actor in it
+  if (actorMap[newKey] != null) {
+    // decrement hitpoints of the actor at the destination tile
+    var victim = actorMap[newKey];
+    victim.hp--;
+
+    // if it's dead remove its reference
+    if (victim.hp == 0) {
+      actorMap[newKey] = null;
+      actorList[actorList.indexOf(victim)] = null;
+      if (victim != player) {
+        livingEnemies--;
+        if (livingEnemies == 0) {
+          // victory message
+          var victory = game.add.text(game.world.centerX, game.world.centerY, 'Victory!\nCtrl+r to restart', {fill : '#2e2', align: "center"});
+          victory.anchor.setTo(0.5, 0.5);
+        }
+      }
+    }
+  } else {
+    // remove reference to the actor's old position
+    actorMap[actor.y + '_' + actor.x] = null;
+
+    // update position
+    actor.y += dir.y;
+    actor.x += dir.x;
+
+    // add reference to the actor's new position
+    actorMap[actor.y + '_' + actor.x] = actor;
+  }
+  return true;
+}
+
 function onKeyUp(event) {
   switch (event.KeyCode) {
     case Keyboard.LEFT:
