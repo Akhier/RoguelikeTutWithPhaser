@@ -195,7 +195,7 @@ function onKeyUp(event) {
 
   // enemies act every time the player does
   if (acted) {
-    for (const enemy in actorList) {
+    for (var enemy in actorList) {
       // skip the player
       if (enemy == 0) {
         continue;
@@ -217,6 +217,7 @@ function aiAct(actor) {
 
   // if player is far away, walk randomly
   if (Math.abs(dx) + Math.abs(dy) > 6) {
+    // try to walk in random directions until you succeed once
     while (!moveTo(actor, directions[randomInt(directions.length)])) { };
   }
 
@@ -240,7 +241,7 @@ function aiAct(actor) {
   }
   if (player.hp < 1) {
     // game over message
-    var gameOver = game.add.text(game.world.centerX, game.world.centerY, 'Game Over\nCtrl+r to restart', { fill : '#e22', align: "center"});
+    var gameOver = game.add.text(game.world.centerX, game.world.centerY, 'Game Over\nCtrl+r to restart', {fill : '#e22', align: "center"});
     gameOver.anchor.setTo(0.5, 0.5);
   }
 }
