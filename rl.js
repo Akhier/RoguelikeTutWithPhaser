@@ -1,13 +1,13 @@
 // font size
-var FONT = 32;
+var FONT = 24;
 var FONTWIDTHDIF = 0.6;
 
 // map dimensions
-var ROWS = 10;
-var COLS = 15;
+var ROWS = 28;
+var COLS = 80;
 
 // number of actors per level, including player
-var ACTORS = 10;
+var ACTORS = 20;
 
 // the structure of the map
 var map;
@@ -68,7 +68,7 @@ function initMap() {
   for (var y = 0; y < ROWS; y++) {
     var newRow = [];
     for (var x = 0; x < COLS; x++) {
-      if (Math.random() > 0.8) {
+      if (y == 0 || x == 0 || y == ROWS - 1 || x == COLS -1 || Math.random() > 0.8) {
         newRow.push('#');
       } else {
         newRow.push('.');
